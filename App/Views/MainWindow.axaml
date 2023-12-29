@@ -1,0 +1,31 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:App.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="using:App.Views"
+        mc:Ignorable="d" d:DesignWidth="1400" d:DesignHeight="400"
+        x:Class="App.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="App">
+    <Grid RowDefinitions="*" ColumnDefinitions="30*, 60*, 10*">
+        <Grid Grid.Column="0" RowDefinitions="30*, 70*" ColumnDefinitions="*">
+            <Grid Grid.Column="0" RowDefinitions="*" ColumnDefinitions="40*, 60*">
+                <TextBlock Grid.Column="0">Assets</TextBlock>
+                <TextBlock Grid.Column="1">Positions</TextBlock>
+            </Grid>
+            <TextBlock Grid.Row="1">Trades</TextBlock>
+        </Grid>
+        <Grid Grid.Column="1" RowDefinitions="30*, 70*" ColumnDefinitions="*">
+            <TextBlock Grid.Row="0">Active orders</TextBlock>
+            <TextBlock Grid.Row="1">Last orders</TextBlock>
+        </Grid>
+        <Grid Grid.Column="2" RowDefinitions="10*, 30*, 30*, 30*" ColumnDefinitions="*">
+            <views:ConnectionControl Grid.Row="0"/>
+            <TextBlock Grid.Row="1">Order buttons</TextBlock>
+            <TextBlock Grid.Row="2">Instruments</TextBlock>
+            <TextBlock Grid.Row="3">Last 120 candles</TextBlock>
+        </Grid>
+    </Grid>
+</Window>
