@@ -1,5 +1,5 @@
 ﻿using ReactiveUI;
 
-namespace App.ViewModels;
+namespace App.Lib;
 
 public class ViewModelBase : ReactiveObject { }

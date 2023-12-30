@@ -1,7 +1,8 @@
-using App.ViewModels;
+using App.Connection.ViewModels;
+using App.Lib;
 using Avalonia.Controls;
 
-namespace App.Views;
+namespace App.Connection.Views;
 
 public partial class ConnectionControl : UserControl
 {

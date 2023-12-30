@@ -2,10 +2,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:vm="using:App.ViewModels"
-        xmlns:views="using:App.Views"
+        xmlns:connection="clr-namespace:App.Connection.Views"
+        xmlns:vm="clr-namespace:App.Main.ViewModels"
         mc:Ignorable="d" d:DesignWidth="1400" d:DesignHeight="400"
-        x:Class="App.Views.MainWindow"
+        x:Class="App.Main.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="App">
@@ -22,7 +22,7 @@
             <TextBlock Grid.Row="1">Last orders</TextBlock>
         </Grid>
         <Grid Grid.Column="2" RowDefinitions="10*, 30*, 30*, 30*" ColumnDefinitions="*">
-            <views:ConnectionControl Grid.Row="0"/>
+            <connection:ConnectionControl Grid.Row="0"/>
             <TextBlock Grid.Row="1">Order buttons</TextBlock>
             <TextBlock Grid.Row="2">Instruments</TextBlock>
             <TextBlock Grid.Row="3">Last 120 candles</TextBlock>

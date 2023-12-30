@@ -1,6 +1,7 @@
 ﻿using Annium.Logging;
+using App.Lib;
 
-namespace App.ViewModels;
+namespace App.Main.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase, ILogSubject
 {

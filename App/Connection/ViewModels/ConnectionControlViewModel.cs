@@ -3,10 +3,11 @@ using System.Threading.Tasks;
 using Annium;
 using Annium.Logging;
 using Annium.Threading;
+using App.Lib;
 using NodaTime;
 using ReactiveUI;
 
-namespace App.ViewModels;
+namespace App.Connection.ViewModels;
 
 public class ConnectionControlViewModel : ViewModelBase, IAsyncDisposable, IDisposable, ILogSubject
 {

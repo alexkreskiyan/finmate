@@ -1,7 +1,8 @@
 using System;
 using Annium.Core.DependencyInjection;
-using App.ViewModels;
-using App.Views;
+using App.Lib;
+using App.Main.ViewModels;
+using App.Main.Views;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;

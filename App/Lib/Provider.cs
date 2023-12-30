@@ -2,7 +2,7 @@ using System;
 using Annium;
 using Annium.Core.DependencyInjection;
 
-namespace App;
+namespace App.Lib;
 
 internal static class Provider
 {
