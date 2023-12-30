@@ -2,8 +2,7 @@ using System;
 using Annium.Core.DependencyInjection;
 using Annium.Logging.File;
 using Annium.Logging.Shared;
-using App.Connection.ViewModels;
-using App.Main.ViewModels;
+using App.Lib;
 using ReactiveUI;
 using Splat;
 using Splat.Microsoft.Extensions.DependencyInjection;
@@ -19,10 +18,10 @@ internal class ServicePack : ServicePackBase
         container.AddTime().WithRealTime().SetDefault();
         container.AddLogging();
 
-        // view models
-        container.Add<MainWindowViewModel>().AsSelf().Singleton();
-        container.Add<ConnectionControlViewModel>().AsSelf().Transient();
-        // container.AddAll().AssignableTo<ViewModelBase>().AsSelf().Transient();
+        // elements
+        container.AddAll().AssignableTo<ISingleton>().AsSelf().Singleton();
+        container.AddAll().AssignableTo<IScoped>().AsSelf().Scoped();
+        container.AddAll().AssignableTo<ITransient>().AsSelf().Transient();
 
         // configure splat
         container.Collection.UseMicrosoftDependencyResolver();

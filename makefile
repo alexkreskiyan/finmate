@@ -19,7 +19,7 @@ test:
 	dotnet test -c Release --no-build --nologo -v q
 
 run:
-	cd App && dotnet run
+	./App/bin/Release/net8.0/App
 
 
 .PHONY: $(MAKECMDGOALS)

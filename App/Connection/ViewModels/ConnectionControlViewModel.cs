@@ -9,7 +9,7 @@ using ReactiveUI;
 
 namespace App.Connection.ViewModels;
 
-public class ConnectionControlViewModel : ViewModelBase, IAsyncDisposable, IDisposable, ILogSubject
+public class ConnectionControlViewModel : ViewModelBase, ISingleton, IAsyncDisposable, IDisposable, ILogSubject
 {
     private static readonly DateTimeZone UtcTz = DateTimeZone.Utc;
     public ILogger Logger { get; }
