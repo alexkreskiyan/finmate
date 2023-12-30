@@ -1,50 +1,60 @@
 using System;
-using System.Threading.Tasks;
-using Annium;
+using Annium.Finance.Providers.Abstractions.Connectors.Connectors;
 using Annium.Logging;
-using Annium.Threading;
 using App.Lib;
-using NodaTime;
+using Avalonia.Media;
+using DynamicData.Kernel;
 using ReactiveUI;
 
 namespace App.Connection.ViewModels;
 
-public class ConnectionControlViewModel : ViewModelBase, ISingleton, IAsyncDisposable, IDisposable, ILogSubject
+public class ConnectionControlViewModel : ViewModelBase, ISingleton, ILogSubject
 {
-    private static readonly DateTimeZone UtcTz = DateTimeZone.Utc;
     public ILogger Logger { get; }
-    public string Text
+
+    public IBrush MarketColor
     {
-        get => _text;
-        set => this.RaiseAndSetIfChanged(ref _text, value);
+        get => _marketColor;
+        set => this.RaiseAndSetIfChanged(ref _marketColor, value);
     }
 
-    private readonly ITimeProvider _timeProvider;
-    private string _text = string.Empty;
+    public IBrush UserColor
+    {
+        get => _userColor;
+        set => this.RaiseAndSetIfChanged(ref _userColor, value);
+    }
 
-    public ConnectionControlViewModel(Main.Services.Connection connection, ITimeProvider timeProvider, ILogger logger)
+    private IBrush _marketColor = GetConnectorStatusColor(ConnectorStatus.Disconnected);
+    private IBrush _userColor = GetConnectorStatusColor(ConnectorStatus.Disconnected);
+
+    public ConnectionControlViewModel(Main.Services.Connection connection, ILogger logger)
     {
         Logger = logger;
-        _timeProvider = timeProvider;
-        Timers.Async(SetTime, 0, 100);
+
+        this.Trace("setup market color tracking");
+        connection.MarketConnector.OnStatusChanged += status => MarketColor = GetConnectorStatusColor(status);
+
+        this.Trace("setup market color to {status}", connection.MarketConnector.Status);
+        MarketColor = GetConnectorStatusColor(connection.MarketConnector.Status);
+
+        this.Trace("setup user color tracking");
+        connection.UserConnector.OnStatusChanged += status => UserColor = GetConnectorStatusColor(status);
+
+        this.Trace("setup user color to {status}", connection.UserConnector.Status);
+        UserColor = GetConnectorStatusColor(connection.UserConnector.Status);
+
+        this.Trace("done");
     }
 
-    private ValueTask SetTime()
+    private static IBrush GetConnectorStatusColor(ConnectorStatus status)
     {
-        Text = _timeProvider.Now.InZone(UtcTz).LocalDateTime.ToString("dd.MM.yy HH:mm:ss.fff", null);
+        Console.WriteLine($"STATUS!: {status}");
 
-        return ValueTask.CompletedTask;
-    }
-
-    public ValueTask DisposeAsync()
-    {
-        this.Info("done");
-
-        return ValueTask.CompletedTask;
-    }
-
-    public void Dispose()
-    {
-        this.Info("done");
+        return status switch
+        {
+            ConnectorStatus.Connected => Brushes.Green,
+            ConnectorStatus.Connecting => Brushes.Orange,
+            _ => Brushes.Red,
+        };
     }
 }

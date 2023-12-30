@@ -6,5 +6,24 @@
              mc:Ignorable="d" d:DesignWidth="100" d:DesignHeight="50"
              x:Class="App.Connection.Views.ConnectionControl"
              x:DataType="viewModels:ConnectionControlViewModel">
-    <TextBlock Text="{Binding Text}"/>
+    <StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Border Width="20" 
+                    Height="20"
+                    Background="{Binding MarketColor}" 
+                    BorderThickness="0"
+                    CornerRadius="10"
+                    Margin="2" />
+            <TextBlock>Market</TextBlock>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Border Width="20" 
+                    Height="20"
+                    Background="{Binding UserColor}" 
+                    BorderThickness="0"
+                    CornerRadius="10"
+                    Margin="2" />
+            <TextBlock>User</TextBlock>
+        </StackPanel>
+    </StackPanel>
 </UserControl>

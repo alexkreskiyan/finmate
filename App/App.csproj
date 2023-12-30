@@ -28,5 +28,6 @@
     </ItemGroup>
     <ItemGroup>
         <AvaloniaResource Include="**\Assets\**" />
+        <None Include="config.yml" CopyToOutputDirectory="Always" />
     </ItemGroup>
 </Project>
