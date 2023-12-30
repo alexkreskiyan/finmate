@@ -22,7 +22,7 @@ public class ConnectionControlViewModel : ViewModelBase, ISingleton, IAsyncDispo
     private readonly ITimeProvider _timeProvider;
     private string _text = string.Empty;
 
-    public ConnectionControlViewModel(ITimeProvider timeProvider, ILogger logger)
+    public ConnectionControlViewModel(Main.Services.Connection connection, ITimeProvider timeProvider, ILogger logger)
     {
         Logger = logger;
         _timeProvider = timeProvider;

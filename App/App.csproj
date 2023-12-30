@@ -15,7 +15,9 @@
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Annium.Configuration.Yaml" Version="0.1.0" />
+        <PackageReference Include="Annium.Finance.Providers.Crypto.Binance.UsdFutures" Version="0.1.0" />
         <PackageReference Include="Annium.Infrastructure.Hosting" Version="0.1.0" />
+        <PackageReference Include="Annium.Logging.Console" Version="0.1.0" />
         <PackageReference Include="Annium.Logging.File" Version="0.1.0" />
         <PackageReference Include="Avalonia" Version="11.0.6" />
         <PackageReference Include="Avalonia.Desktop" Version="11.0.6" />
@@ -26,6 +28,6 @@
         <PackageReference Include="Splat.Microsoft.Extensions.DependencyInjection" Version="14.8.12" />
     </ItemGroup>
     <ItemGroup>
-        <AvaloniaResource Include="Assets\**" />
+        <AvaloniaResource Include="**\Assets\**" />
     </ItemGroup>
 </Project>
