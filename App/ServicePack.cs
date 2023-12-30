@@ -42,9 +42,6 @@ internal class ServicePack : ServicePackBase
 
     public override void Setup(IServiceProvider provider)
     {
-        provider.UseLogging(
-            route => route.UseConsole()
-            // route => route.UseFile(new FileLoggingConfiguration<DefaultLogContext> { GetFile = _ => "app.log" })
-        );
+        provider.UseLogging(route => route.UseConsole());
     }
 }
