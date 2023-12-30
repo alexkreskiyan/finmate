@@ -1,9 +1,15 @@
-﻿namespace App.ViewModels;
+﻿using Annium.Logging;
 
-public class MainWindowViewModel : ViewModelBase
+namespace App.ViewModels;
+
+public class MainWindowViewModel : ViewModelBase, ILogSubject
 {
-    public MainWindowViewModel()
+    public ILogger Logger { get; }
+
+    public MainWindowViewModel(ILogger logger)
     {
+        Logger = logger;
+        this.Debug("create");
         /*
          * Config:
          * 1. Credentials
