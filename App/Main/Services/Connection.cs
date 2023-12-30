@@ -58,6 +58,9 @@ public class Connection : ISingleton, ILogSubject
 
         var connector = _marketCache.GetAsync(_mapper.Map<MarketSettings>(_config.Settings)).Result.Value;
 
+        this.Trace("subscribe tickers");
+        connector.SubscribeTickers(_config.Symbols);
+
         this.Trace("done");
 
         return connector;
