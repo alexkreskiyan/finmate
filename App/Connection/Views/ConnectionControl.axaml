@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:App.Connection.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="100" d:DesignHeight="50"
+             mc:Ignorable="d" d:DesignWidth="100" d:DesignHeight="60"
              x:Class="App.Connection.Views.ConnectionControl"
              x:DataType="viewModels:ConnectionControlViewModel">
     <StackPanel>
@@ -13,8 +13,8 @@
                     Background="{Binding MarketColor}" 
                     BorderThickness="0"
                     CornerRadius="10"
-                    Margin="2" />
-            <TextBlock>Market</TextBlock>
+                    Margin="5" />
+            <TextBlock VerticalAlignment="Center" FontSize="16" FontWeight="Bold">Market</TextBlock>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Border Width="20" 
@@ -22,8 +22,8 @@
                     Background="{Binding UserColor}" 
                     BorderThickness="0"
                     CornerRadius="10"
-                    Margin="2" />
-            <TextBlock>User</TextBlock>
+                    Margin="5" />
+            <TextBlock VerticalAlignment="Center" FontSize="16" FontWeight="Bold">User</TextBlock>
         </StackPanel>
     </StackPanel>
 </UserControl>
