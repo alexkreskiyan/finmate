@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:App.Connection.ViewModels"
              mc:Ignorable="d" d:DesignWidth="100" d:DesignHeight="60"
-             x:Class="App.Connection.Views.ConnectionControl"
-             x:DataType="viewModels:ConnectionControlViewModel">
+             x:Class="App.Connection.Views.ConnectionState"
+             x:DataType="viewModels:ConnectionStateViewModel">
     <StackPanel>
         <StackPanel Orientation="Horizontal">
             <Border Width="20" 

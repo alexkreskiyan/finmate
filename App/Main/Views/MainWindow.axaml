@@ -22,7 +22,7 @@
             <TextBlock Grid.Row="1">Last orders</TextBlock>
         </Grid>
         <Grid Grid.Column="2" RowDefinitions="10*, 30*, 30*, 30*" ColumnDefinitions="*">
-            <connection:ConnectionControl Grid.Row="0"/>
+            <connection:ConnectionState Grid.Row="0"/>
             <TextBlock Grid.Row="1">Order buttons</TextBlock>
             <TextBlock Grid.Row="2">Instruments</TextBlock>
             <TextBlock Grid.Row="3">Last 120 candles</TextBlock>

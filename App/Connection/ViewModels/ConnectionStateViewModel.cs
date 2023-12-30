@@ -3,12 +3,11 @@ using Annium.Finance.Providers.Abstractions.Connectors.Connectors;
 using Annium.Logging;
 using App.Lib;
 using Avalonia.Media;
-using DynamicData.Kernel;
 using ReactiveUI;
 
 namespace App.Connection.ViewModels;
 
-public class ConnectionControlViewModel : ViewModelBase, ISingleton, ILogSubject
+public class ConnectionStateViewModel : ViewModelBase, ISingleton, ILogSubject
 {
     public ILogger Logger { get; }
 
@@ -27,7 +26,7 @@ public class ConnectionControlViewModel : ViewModelBase, ISingleton, ILogSubject
     private IBrush _marketColor = GetConnectorStatusColor(ConnectorStatus.Disconnected);
     private IBrush _userColor = GetConnectorStatusColor(ConnectorStatus.Disconnected);
 
-    public ConnectionControlViewModel(Main.Services.Connection connection, ILogger logger)
+    public ConnectionStateViewModel(Main.Services.Connection connection, ILogger logger)
     {
         Logger = logger;
 

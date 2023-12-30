@@ -4,11 +4,11 @@ using Avalonia.Controls;
 
 namespace App.Connection.Views;
 
-public partial class ConnectionControl : UserControl
+public partial class ConnectionState : UserControl
 {
-    public ConnectionControl()
+    public ConnectionState()
     {
         InitializeComponent();
-        DataContext = Provider.Resolve<ConnectionControlViewModel>();
+        DataContext = Provider.Resolve<ConnectionStateViewModel>();
     }
 }
