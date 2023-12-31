@@ -6,24 +6,26 @@
              mc:Ignorable="d" d:DesignWidth="100" d:DesignHeight="60"
              x:Class="App.Connection.Views.ConnectionState"
              x:DataType="viewModels:ConnectionStateViewModel">
-    <StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Border Width="20" 
-                    Height="20"
-                    Background="{Binding MarketColor}" 
-                    BorderThickness="0"
-                    CornerRadius="10"
-                    Margin="5" />
-            <TextBlock VerticalAlignment="Center" FontSize="16" FontWeight="Bold">Market</TextBlock>
+    <Border BorderBrush="Gray" BorderThickness="2">
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Border Width="20"
+                        Height="20"
+                        Background="{Binding MarketColor}"
+                        BorderThickness="0"
+                        CornerRadius="10"
+                        Margin="5" />
+                <TextBlock VerticalAlignment="Center" FontSize="16" FontWeight="Bold">Market</TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Border Width="20"
+                        Height="20"
+                        Background="{Binding UserColor}"
+                        BorderThickness="0"
+                        CornerRadius="10"
+                        Margin="5" />
+                <TextBlock VerticalAlignment="Center" FontSize="16" FontWeight="Bold">User</TextBlock>
+            </StackPanel>
         </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Border Width="20" 
-                    Height="20"
-                    Background="{Binding UserColor}" 
-                    BorderThickness="0"
-                    CornerRadius="10"
-                    Margin="5" />
-            <TextBlock VerticalAlignment="Center" FontSize="16" FontWeight="Bold">User</TextBlock>
-        </StackPanel>
-    </StackPanel>
+    </Border>
 </UserControl>

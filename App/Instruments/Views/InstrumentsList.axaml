@@ -6,26 +6,28 @@
              mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="500"
              x:Class="App.Instruments.Views.InstrumentsList"
              x:DataType="viewModels:InstrumentsListViewModel">
-    <DockPanel>
-        <TextBlock DockPanel.Dock="Top" FontSize="16" FontWeight="Bold">Instruments</TextBlock>
-        <DataGrid ItemsSource="{Binding Tickers}"
-                  IsReadOnly="True"
-                  SelectedIndex="-1"
-                  SelectionChanged="HandleSelectionChanged"
-                  CanUserReorderColumns="False"
-                  CanUserResizeColumns="False"
-                  CanUserSortColumns="False"
-                  GridLinesVisibility="All"
-                  HorizontalAlignment="Stretch"
-                  VerticalAlignment="Stretch"
-                  RowBackground="#1000"
-                  BorderThickness="1"
-                  BorderBrush="Gray">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}" Width="1*" />
-                <DataGridTextColumn Header="Bid" Binding="{Binding BidPrice}" Width="1*" />
-                <DataGridTextColumn Header="Ask" Binding="{Binding AskPrice}" Width="1*" />
-            </DataGrid.Columns>
-        </DataGrid>
-    </DockPanel>
+    <Border BorderBrush="Gray" BorderThickness="2">
+        <DockPanel>
+            <TextBlock DockPanel.Dock="Top" FontSize="16" FontWeight="Bold">Instruments</TextBlock>
+            <DataGrid ItemsSource="{Binding Tickers}"
+                      IsReadOnly="True"
+                      SelectedIndex="-1"
+                      SelectionChanged="HandleSelectionChanged"
+                      CanUserReorderColumns="False"
+                      CanUserResizeColumns="False"
+                      CanUserSortColumns="False"
+                      GridLinesVisibility="All"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      RowBackground="#1000"
+                      BorderThickness="1"
+                      BorderBrush="Gray">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}" Width="1*" />
+                    <DataGridTextColumn Header="Bid" Binding="{Binding BidPrice}" Width="1*" />
+                    <DataGridTextColumn Header="Ask" Binding="{Binding AskPrice}" Width="1*" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+    </Border>
 </UserControl>

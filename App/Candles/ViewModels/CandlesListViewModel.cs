@@ -49,6 +49,8 @@ public class CandlesListViewModel : ViewModelBase, ISingleton, ILogSubject
         var end = _timeProvider.Now.CeilToMinute();
         var start = end.Minus(Duration.FromMinutes(10));
 
+        this.Trace("load {env} {symbol} in {start} - {end}", env, symbol, start, end);
+
         await foreach (var result in _link.MarketProvider.LoadCandlesAsync(symbol, env, start, end, default))
         {
             if (result.IsFailure)
