@@ -3,14 +3,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:App.Instruments.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="100"
+             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="500"
              x:Class="App.Instruments.Views.InstrumentsList"
              x:DataType="viewModels:InstrumentsListViewModel">
-    <StackPanel>
-        <TextBlock FontSize="16" FontWeight="Bold">Instruments</TextBlock>
+    <DockPanel>
+        <TextBlock DockPanel.Dock="Top" FontSize="16" FontWeight="Bold">Instruments</TextBlock>
         <DataGrid ItemsSource="{Binding Tickers}"
                   IsReadOnly="True"
                   SelectedIndex="-1"
+                  SelectionChanged="HandleSelectionChanged"
                   CanUserReorderColumns="False"
                   CanUserResizeColumns="False"
                   CanUserSortColumns="False"
@@ -21,10 +22,10 @@
                   BorderThickness="1"
                   BorderBrush="Gray">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}" Width="4*" />
-                <DataGridTextColumn Header="Bid" Binding="{Binding BidPrice}" />
-                <DataGridTextColumn Header="Ask" Binding="{Binding AskPrice}" />
+                <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}" Width="1*" />
+                <DataGridTextColumn Header="Bid" Binding="{Binding BidPrice}" Width="1*" />
+                <DataGridTextColumn Header="Ask" Binding="{Binding AskPrice}" Width="1*" />
             </DataGrid.Columns>
         </DataGrid>
-    </StackPanel>
+    </DockPanel>
 </UserControl>

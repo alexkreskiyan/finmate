@@ -2,6 +2,7 @@ using System;
 using Annium.Finance.Providers.Abstractions.Connectors.Connectors;
 using Annium.Logging;
 using App.Lib;
+using App.Main.Services;
 using Avalonia.Media;
 using ReactiveUI;
 
@@ -26,21 +27,21 @@ public class ConnectionStateViewModel : ViewModelBase, ISingleton, ILogSubject
     private IBrush _marketColor = GetConnectorStatusColor(ConnectorStatus.Disconnected);
     private IBrush _userColor = GetConnectorStatusColor(ConnectorStatus.Disconnected);
 
-    public ConnectionStateViewModel(Main.Services.Connection connection, ILogger logger)
+    public ConnectionStateViewModel(Link link, ILogger logger)
     {
         Logger = logger;
 
         this.Trace("setup market color tracking");
-        connection.MarketConnector.OnStatusChanged += status => MarketColor = GetConnectorStatusColor(status);
+        link.MarketConnector.OnStatusChanged += status => MarketColor = GetConnectorStatusColor(status);
 
-        this.Trace("setup market color to {status}", connection.MarketConnector.Status);
-        MarketColor = GetConnectorStatusColor(connection.MarketConnector.Status);
+        this.Trace("setup market color to {status}", link.MarketConnector.Status);
+        MarketColor = GetConnectorStatusColor(link.MarketConnector.Status);
 
         this.Trace("setup user color tracking");
-        connection.UserConnector.OnStatusChanged += status => UserColor = GetConnectorStatusColor(status);
+        link.UserConnector.OnStatusChanged += status => UserColor = GetConnectorStatusColor(status);
 
-        this.Trace("setup user color to {status}", connection.UserConnector.Status);
-        UserColor = GetConnectorStatusColor(connection.UserConnector.Status);
+        this.Trace("setup user color to {status}", link.UserConnector.Status);
+        UserColor = GetConnectorStatusColor(link.UserConnector.Status);
 
         this.Trace("done");
     }

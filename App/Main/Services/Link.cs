@@ -9,24 +9,31 @@ using Annium.Logging;
 using App.Lib;
 using App.Main.Models;
 using Microsoft.Extensions.DependencyInjection;
+using ReactiveUI;
 
 namespace App.Main.Services;
 
-public class Connection : ISingleton, ILogSubject
+public class Link : ReactiveObject, ISingleton, ILogSubject
 {
     public ILogger Logger { get; }
     public IMarketProvider MarketProvider { get; }
     public IMarketConnector MarketConnector => _marketConnector.Value;
     public IUserProvider UserProvider { get; }
     public IUserConnector UserConnector => _userConnector.Value;
+    public string Symbol
+    {
+        get => _symbol;
+        set => this.RaiseAndSetIfChanged(ref _symbol, value);
+    }
     private readonly Lazy<IMarketConnector> _marketConnector;
     private readonly Lazy<IUserConnector> _userConnector;
     private readonly Configuration _config;
     private readonly IObjectCache<MarketSettings, IMarketConnector> _marketCache;
     private readonly IObjectCache<UserSettings, IUserConnector> _userCache;
     private readonly IMapper _mapper;
+    private string _symbol;
 
-    public Connection(
+    public Link(
         Configuration config,
         [FromKeyedServices(Constants.Provider)] IMarketProvider marketProvider,
         [FromKeyedServices(Constants.Provider)] IUserProvider userProvider,
@@ -50,6 +57,7 @@ public class Connection : ISingleton, ILogSubject
         UserProvider = userProvider;
         _marketConnector = new Lazy<IMarketConnector>(GetMarketConnector);
         _userConnector = new Lazy<IUserConnector>(GetUserConnector);
+        _symbol = _config.Symbols[0];
     }
 
     private IMarketConnector GetMarketConnector()

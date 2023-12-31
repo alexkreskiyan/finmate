@@ -4,9 +4,11 @@ using System.Linq;
 using Annium;
 using Annium.Finance.Providers.Abstractions.Domain.Models;
 using Annium.Logging;
+using App.Instruments.Models;
 using App.Lib;
 using App.Main.Models;
-using DynamicData;
+using App.Main.Services;
+using Avalonia.Controls;
 using NodaTime;
 
 namespace App.Instruments.ViewModels;
@@ -14,29 +16,38 @@ namespace App.Instruments.ViewModels;
 public class InstrumentsListViewModel : ViewModelBase, ISingleton, ILogSubject
 {
     public ILogger Logger { get; }
-    public ObservableCollection<InstrumentTicker> Tickers { get; }
+    public ObservableCollection<Ticker> Tickers { get; }
+    private readonly Link _link;
 
-    public InstrumentsListViewModel(Configuration configuration, Main.Services.Connection connection, ILogger logger)
+    public InstrumentsListViewModel(Configuration configuration, Link link, ILogger logger)
     {
+        _link = link;
         Logger = logger;
 
         this.Trace("init tickers");
-        Tickers = new ObservableCollection<InstrumentTicker>(
-            configuration.Symbols.OrderBy(x => x).Select(x => new InstrumentTicker(x, 0, 0))
+        Tickers = new ObservableCollection<Ticker>(
+            configuration.Symbols.OrderBy(x => x).Select(x => new Ticker(x, 0, 0))
         );
 
         this.Trace("observe tickers");
-        connection.MarketConnector.Tickers
-            .ThrottleBy(x => x.Symbol, Duration.FromMilliseconds(100))
-            .Subscribe(HandleTicker);
+        link.MarketConnector.Tickers.ThrottleBy(x => x.Symbol, Duration.FromMilliseconds(100)).Subscribe(HandleTicker);
 
         this.Trace("done");
     }
 
-    private void HandleTicker(InstrumentTicker ticker)
+    public void HandleSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
-        this.Trace("handle {ticker}", ticker);
-        var existing = Tickers.FirstOrDefault(x => x.Symbol == ticker.Symbol).NotNull();
-        Tickers.Replace(existing, ticker);
+        if (e.AddedItems.Count == 0)
+            return;
+
+        var ticker = e.AddedItems[0].NotNull().CastTo<Ticker>();
+        _link.Symbol = ticker.Symbol;
+    }
+
+    private void HandleTicker(InstrumentTicker update)
+    {
+        var ticker = Tickers.FirstOrDefault(x => x.Symbol == update.Symbol).NotNull();
+        ticker.BidPrice = update.BidPrice;
+        ticker.AskPrice = update.AskPrice;
     }
 }
