@@ -2,6 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:assets="clr-namespace:App.Assets.Views"
         xmlns:candles="clr-namespace:App.Candles.Views"
         xmlns:connection="clr-namespace:App.Connection.Views"
         xmlns:instruments="clr-namespace:App.Instruments.Views"
@@ -13,7 +14,7 @@
     <Grid RowDefinitions="*" ColumnDefinitions="25*, 55*, 20*">
         <Grid Grid.Column="0" RowDefinitions="30*, 70*" ColumnDefinitions="*">
             <Grid Grid.Column="0" RowDefinitions="*" ColumnDefinitions="40*, 60*">
-                <TextBlock Grid.Column="0">Assets</TextBlock>
+                <assets:AssetsList Grid.Row="0"/>
                 <TextBlock Grid.Column="1">Positions</TextBlock>
             </Grid>
             <TextBlock Grid.Row="1">Trades</TextBlock>
