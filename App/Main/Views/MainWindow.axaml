@@ -9,7 +9,6 @@
         mc:Ignorable="d" d:DesignWidth="1400" d:DesignHeight="400"
         x:Class="App.Main.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        Icon="/Main/Assets/avalonia-logo.ico"
         Title="App">
     <Grid RowDefinitions="*" ColumnDefinitions="25*, 55*, 20*">
         <Grid Grid.Column="0" RowDefinitions="30*, 70*" ColumnDefinitions="*">

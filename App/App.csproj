@@ -28,7 +28,6 @@
         <PackageReference Include="Splat.Microsoft.Extensions.DependencyInjection" Version="14.8.12" />
     </ItemGroup>
     <ItemGroup>
-        <AvaloniaResource Include="**\Assets\**" />
         <None Include="config.yml" CopyToOutputDirectory="Always" />
     </ItemGroup>
 </Project>
