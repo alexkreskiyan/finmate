@@ -3,6 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:connection="clr-namespace:App.Connection.Views"
+        xmlns:instruments="clr-namespace:App.Instruments.Views"
         xmlns:vm="clr-namespace:App.Main.ViewModels"
         mc:Ignorable="d" d:DesignWidth="1400" d:DesignHeight="400"
         x:Class="App.Main.Views.MainWindow"
@@ -24,7 +25,7 @@
         <Grid Grid.Column="2" RowDefinitions="10*, 30*, 30*, 30*" ColumnDefinitions="*">
             <connection:ConnectionState Grid.Row="0"/>
             <TextBlock Grid.Row="1">Order buttons</TextBlock>
-            <TextBlock Grid.Row="2">Instruments</TextBlock>
+            <instruments:InstrumentsList Grid.Row="2"/>
             <TextBlock Grid.Row="3">Last 120 candles</TextBlock>
         </Grid>
     </Grid>

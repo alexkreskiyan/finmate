@@ -1,0 +1,30 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:App.Instruments.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="100"
+             x:Class="App.Instruments.Views.InstrumentsList"
+             x:DataType="viewModels:InstrumentsListViewModel">
+    <StackPanel>
+        <TextBlock FontSize="16" FontWeight="Bold">Instruments</TextBlock>
+        <DataGrid ItemsSource="{Binding Tickers}"
+                  IsReadOnly="True"
+                  SelectedIndex="-1"
+                  CanUserReorderColumns="False"
+                  CanUserResizeColumns="False"
+                  CanUserSortColumns="False"
+                  GridLinesVisibility="All"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  RowBackground="#1000"
+                  BorderThickness="1"
+                  BorderBrush="Gray">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}" Width="4*" />
+                <DataGridTextColumn Header="Bid" Binding="{Binding BidPrice}" />
+                <DataGridTextColumn Header="Ask" Binding="{Binding AskPrice}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+</UserControl>
