@@ -1,0 +1,34 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:App.Positions.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="500"
+             x:Class="App.Positions.Views.PositionsList"
+             x:DataType="viewModels:PositionsListViewModel">
+    <Border BorderBrush="Gray" BorderThickness="2">
+        <DockPanel>
+            <TextBlock DockPanel.Dock="Top" FontSize="16" FontWeight="Bold">Positions</TextBlock>
+            <DataGrid ItemsSource="{Binding Positions}"
+                      IsReadOnly="True"
+                      SelectedIndex="-1"
+                      CanUserReorderColumns="False"
+                      CanUserResizeColumns="False"
+                      CanUserSortColumns="False"
+                      GridLinesVisibility="All"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      RowBackground="#1000"
+                      BorderThickness="1"
+                      BorderBrush="Gray">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}" Width="2*" FontSize="11" />
+                    <DataGridTextColumn Header="Range" Binding="{Binding Orientation}" Width="2*" FontSize="11" />
+                    <DataGridTextColumn Header="Margin" Binding="{Binding MarginType}" Width="2*" FontSize="11" />
+                    <DataGridTextColumn Header="Leverage" Binding="{Binding Leverage}" Width="2*" FontSize="11" />
+                    <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" Width="3*" FontSize="11" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+    </Border>
+</UserControl>

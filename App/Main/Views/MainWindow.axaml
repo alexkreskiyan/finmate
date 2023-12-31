@@ -6,6 +6,7 @@
         xmlns:candles="clr-namespace:App.Candles.Views"
         xmlns:connection="clr-namespace:App.Connection.Views"
         xmlns:instruments="clr-namespace:App.Instruments.Views"
+        xmlns:positions="clr-namespace:App.Positions.Views"
         xmlns:vm="clr-namespace:App.Main.ViewModels"
         mc:Ignorable="d" d:DesignWidth="1400" d:DesignHeight="400"
         x:Class="App.Main.Views.MainWindow"
@@ -14,8 +15,8 @@
     <Grid RowDefinitions="*" ColumnDefinitions="25*, 55*, 20*">
         <Grid Grid.Column="0" RowDefinitions="30*, 70*" ColumnDefinitions="*">
             <Grid Grid.Column="0" RowDefinitions="*" ColumnDefinitions="40*, 60*">
-                <assets:AssetsList Grid.Row="0"/>
-                <TextBlock Grid.Column="1">Positions</TextBlock>
+                <assets:AssetsList Grid.Column="0"/>
+                <positions:PositionsList Grid.Column="1"/>
             </Grid>
             <TextBlock Grid.Row="1">Trades</TextBlock>
         </Grid>
