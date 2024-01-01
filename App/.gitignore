@@ -6,4 +6,4 @@
 /*.nupkg
 
 # config
-config.yml
+config*.yml

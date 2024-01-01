@@ -1,0 +1,38 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:App.Trades.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="500"
+             x:Class="App.Trades.Views.TradesList"
+             x:DataType="viewModels:TradesListViewModel">
+    <Border BorderBrush="Gray" BorderThickness="2">
+        <DockPanel>
+            <TextBlock DockPanel.Dock="Top" FontSize="16" FontWeight="Bold">Trades</TextBlock>
+            <DataGrid ItemsSource="{Binding Trades}"
+                      IsReadOnly="True"
+                      SelectedIndex="-1"
+                      CanUserReorderColumns="False"
+                      CanUserResizeColumns="False"
+                      CanUserSortColumns="False"
+                      GridLinesVisibility="All"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      RowBackground="#1000"
+                      BorderThickness="1"
+                      BorderBrush="Gray">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="1*" FontSize="10" />
+                    <DataGridTextColumn Header="Order Id" Binding="{Binding OrderId}" Width="1*" FontSize="10" />
+                    <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}" Width="1*" FontSize="10" />
+                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="1*" FontSize="10" />
+                    <DataGridTextColumn Header="Qty" Binding="{Binding Qty}" Width="1*" FontSize="10" />
+                    <DataGridTextColumn Header="Com Asset" Binding="{Binding CommissionAsset}" Width="1*" FontSize="10" />
+                    <DataGridTextColumn Header="Com Sum" Binding="{Binding CommissionAmount}" Width="1*" FontSize="10" />
+                    <DataGridTextColumn Header="Maker" Binding="{Binding Maker}" Width="1*" FontSize="10" />
+                    <DataGridTextColumn Header="Moment" Binding="{Binding Moment}" Width="1*" FontSize="10" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+    </Border>
+</UserControl>
