@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Linq;
 using Annium.Collections.ObjectModel;
-using Annium.Finance.Providers.Abstractions.Domain.Dto;
+using Annium.Finance.Providers.Abstractions.Domain.Models;
 using Annium.Logging;
 using App.Lib;
 using App.Main.Services;
@@ -30,7 +30,7 @@ public class TradesListViewModel : ViewModelBase, ISingleton, ILogSubject
         this.Trace("done");
     }
 
-    private void HandleTrade(TradeDto x)
+    private void HandleTrade(TradeModel x)
     {
         var trade = Trades.FirstOrDefault(t => t.OrderId == x.OrderId && t.Id == x.Id);
 

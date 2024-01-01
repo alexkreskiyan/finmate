@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using Annium.Collections.ObjectModel;
 using Annium.Data.Tables;
-using Annium.Finance.Providers.Abstractions.Domain.Dto;
+using Annium.Finance.Providers.Abstractions.Domain.Models;
 using Annium.Logging;
 using App.Lib;
 using App.Main.Services;
@@ -31,7 +31,7 @@ public class PositionsListViewModel : ViewModelBase, ISingleton, ILogSubject
         this.Trace("done");
     }
 
-    private void HandlePosition(ChangeEvent<PositionDto> e)
+    private void HandlePosition(ChangeEvent<PositionModel> e)
     {
         switch (e.Type)
         {
@@ -54,7 +54,7 @@ public class PositionsListViewModel : ViewModelBase, ISingleton, ILogSubject
         }
     }
 
-    private void SetPosition(PositionDto x)
+    private void SetPosition(PositionModel x)
     {
         var position = Positions.FirstOrDefault(p => p.Symbol == x.Symbol && p.Orientation == x.OrientationRange);
         if (x.Amount == 0m)

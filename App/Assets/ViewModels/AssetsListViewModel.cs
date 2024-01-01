@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using Annium.Collections.ObjectModel;
 using Annium.Data.Tables;
-using Annium.Finance.Providers.Abstractions.Domain.Dto;
+using Annium.Finance.Providers.Abstractions.Domain.Models;
 using Annium.Logging;
 using App.Assets.Models;
 using App.Lib;
@@ -31,7 +31,7 @@ public class AssetsListViewModel : ViewModelBase, ISingleton, ILogSubject
         this.Trace("done");
     }
 
-    private void HandleAsset(ChangeEvent<AssetDto> e)
+    private void HandleAsset(ChangeEvent<AssetModel> e)
     {
         switch (e.Type)
         {
@@ -54,7 +54,7 @@ public class AssetsListViewModel : ViewModelBase, ISingleton, ILogSubject
         }
     }
 
-    private void SetAsset(AssetDto x)
+    private void SetAsset(AssetModel x)
     {
         var asset = Assets.FirstOrDefault(a => a.Resource == x.Resource);
         if (asset is not null)
