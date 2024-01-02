@@ -53,6 +53,6 @@ public class TradesListViewModel : ViewModelBase, ISingleton, ILogSubject
                 x.Moment
             )
         );
-        Trades.Sort((a, b) => string.CompareOrdinal(a.Moment, b.Moment));
+        Trades.Sort((a, b) => -1 * string.CompareOrdinal(a.Moment, b.Moment));
     }
 }
