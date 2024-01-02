@@ -1,4 +1,4 @@
-using Annium.NodaTime.Extensions;
+using App.Lib;
 using NodaTime;
 
 namespace App.Trades.Models;
@@ -35,6 +35,6 @@ public sealed record Trade
         CommissionAsset = commissionAsset;
         CommissionAmount = commissionAmount;
         Maker = maker;
-        Moment = Instant.FromUnixTimeMilliseconds(moment).InLocal().ToString("dd.MM.yy HH:mm:ss", null);
+        Moment = Instant.FromUnixTimeMilliseconds(moment).LocalTime();
     }
 }

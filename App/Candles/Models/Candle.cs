@@ -1,4 +1,4 @@
-using Annium.NodaTime.Extensions;
+using App.Lib;
 using NodaTime;
 using ReactiveUI;
 
@@ -41,7 +41,7 @@ public sealed record Candle : ReactiveRecord
 
     public Candle(long moment, decimal open, decimal high, decimal low, decimal close, decimal volume)
     {
-        Moment = Instant.FromUnixTimeMilliseconds(moment).InLocal().ToString("HH:mm:ss", null);
+        Moment = Instant.FromUnixTimeMilliseconds(moment).LocalTime();
         Open = open;
         High = high;
         Low = low;
