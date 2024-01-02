@@ -23,9 +23,9 @@
                       BorderThickness="1"
                       BorderBrush="Gray">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}" Width="1*" FontSize="9" />
-                    <DataGridTextColumn Header="Bid" Binding="{Binding BidPrice}" Width="1*" FontSize="9" />
-                    <DataGridTextColumn Header="Ask" Binding="{Binding AskPrice}" Width="1*" FontSize="9" />
+                    <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}" Width="1*" FontSize="8" />
+                    <DataGridTextColumn Header="Bid" Binding="{Binding BidPrice}" Width="1*" FontSize="8" />
+                    <DataGridTextColumn Header="Ask" Binding="{Binding AskPrice}" Width="1*" FontSize="8" />
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>

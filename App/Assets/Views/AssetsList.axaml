@@ -23,9 +23,9 @@
                       BorderThickness="1"
                       BorderBrush="Gray">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Code" Binding="{Binding Resource}" Width="3*" FontSize="11" />
-                    <DataGridTextColumn Header="Free" Binding="{Binding Free}" Width="4*" FontSize="11" />
-                    <DataGridTextColumn Header="Locked" Binding="{Binding Locked}" Width="4*" FontSize="11" />
+                    <DataGridTextColumn Header="Code" Binding="{Binding Resource}" Width="3*" FontSize="8" />
+                    <DataGridTextColumn Header="Free" Binding="{Binding Free}" Width="4*" FontSize="8" />
+                    <DataGridTextColumn Header="Locked" Binding="{Binding Locked}" Width="4*" FontSize="8" />
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>
