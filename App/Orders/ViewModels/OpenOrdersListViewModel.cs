@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Annium.Collections.ObjectModel;
 using Annium.Data.Tables;
 using Annium.Finance.Providers.Abstractions.Domain.Enums;
@@ -18,12 +17,11 @@ using NodaTime;
 
 namespace App.Orders.ViewModels;
 
-public class OpenOrdersListViewModel : ViewModelBase, ISingleton, ILogSubject
+public partial class OpenOrdersListViewModel : ViewModelBase, ISingleton, ILogSubject
 {
     private readonly Link _link;
     public ILogger Logger { get; }
     public ObservableCollection<Order> Orders { get; }
-    public ICommand CancelOrderCommand { get; }
 
     public OpenOrdersListViewModel(Link link, ILogger logger)
     {
@@ -35,8 +33,6 @@ public class OpenOrdersListViewModel : ViewModelBase, ISingleton, ILogSubject
 
         this.Trace("observe orders");
         link.UserConnector.Orders.SubscribeOn(AvaloniaScheduler.Instance).Subscribe(HandleOrder);
-
-        CancelOrderCommand = new AsyncRelayCommand<Order>(CancelOrder);
 
         this.Trace("done");
     }
@@ -107,6 +103,7 @@ public class OpenOrdersListViewModel : ViewModelBase, ISingleton, ILogSubject
         }
     }
 
+    [RelayCommand]
     private async Task CancelOrder(Order? x)
     {
         if (x is null)
