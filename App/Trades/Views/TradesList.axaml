@@ -9,7 +9,7 @@
     <Border BorderBrush="Gray" BorderThickness="2">
         <DockPanel>
             <TextBlock DockPanel.Dock="Top" FontSize="16" FontWeight="Bold">Trades</TextBlock>
-            <DataGrid ItemsSource="{Binding Trades}"
+            <DataGrid ItemsSource="{Binding Items}"
                       IsReadOnly="True"
                       SelectedIndex="-1"
                       CanUserReorderColumns="False"
@@ -30,7 +30,7 @@
                     <DataGridTextColumn Header="Com Asset" Binding="{Binding CommissionAsset}" Width="1*" FontSize="11" />
                     <DataGridTextColumn Header="Com Sum" Binding="{Binding CommissionAmount}" Width="1*" FontSize="11" />
                     <DataGridTextColumn Header="Maker" Binding="{Binding Maker}" Width="1*" FontSize="11" />
-                    <DataGridTextColumn Header="Moment" Binding="{Binding Moment}" Width="1*" FontSize="11" />
+                    <DataGridTextColumn Header="Moment" Binding="{Binding MomentString}" Width="1*" FontSize="11" />
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>

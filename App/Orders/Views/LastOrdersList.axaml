@@ -4,11 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:App.Orders.ViewModels"
              mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="500"
-             x:Class="App.Orders.Views.OpenOrdersList"
-             x:DataType="viewModels:OpenOrdersListViewModel">
+             x:Class="App.Orders.Views.LastOrdersList"
+             x:DataType="viewModels:LastOrdersListViewModel">
     <Border BorderBrush="Gray" BorderThickness="2">
         <DockPanel>
-            <TextBlock DockPanel.Dock="Top" FontSize="16" FontWeight="Bold">Open Orders</TextBlock>
+            <TextBlock DockPanel.Dock="Top" FontSize="16" FontWeight="Bold">Last Orders</TextBlock>
             <DataGrid
                 Name="Orders"
                 ItemsSource="{Binding Items}"
@@ -38,20 +38,7 @@
                     <DataGridTextColumn Header="Ex qty" Binding="{Binding ExecutedQty}" Width="3*" FontSize="11" />
                     <DataGridTextColumn Header="Ex price" Binding="{Binding ExecutedPrice}" Width="3*" FontSize="11" />
                     <DataGridTextColumn Header="Updated" Binding="{Binding UpdatedAtString}" Width="4*" FontSize="11" />
-                    <DataGridTemplateColumn Width="*" Header="Actions">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button
-                                    HorizontalAlignment="Center"
-                                    HorizontalContentAlignment="Center"
-                                    Background="#232323"
-                                    Command="{Binding #Orders.((viewModels:OpenOrdersListViewModel)DataContext).CancelOrderCommand}"
-                                    CommandParameter="{Binding .}"
-                                    Content="X"
-                                    Foreground="White" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Width="*" Header="Actions" />
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>

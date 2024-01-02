@@ -3,36 +3,31 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Linq;
-using System.Threading.Tasks;
 using Annium.Collections.ObjectModel;
 using Annium.Core.Mapper;
 using Annium.Data.Tables;
-using Annium.Finance.Providers.Abstractions.Domain.Enums;
 using Annium.Finance.Providers.Abstractions.Domain.Models;
 using Annium.Logging;
 using App.Lib;
 using App.Main.Services;
 using App.Orders.Models;
 using Avalonia.ReactiveUI;
-using CommunityToolkit.Mvvm.Input;
-using DynamicData;
 using NodaTime;
 
 namespace App.Orders.ViewModels;
 
-public partial class OpenOrdersListViewModel : ViewModelBase, ISingleton, ILogSubject
+public class LastOrdersListViewModel : ViewModelBase, ISingleton, ILogSubject
 {
+    private const int MaxOrders = 3;
     public ILogger Logger { get; }
     public ObservableCollection<Order> Items { get; }
-    private readonly Link _link;
     private readonly IMapper _mapper;
     private readonly Comparison<Order> _comparison = (a, b) => a.CreatedAt < b.CreatedAt ? 1 : -1;
 
-    public OpenOrdersListViewModel(Link link, IMapper mapper, ILogger logger)
+    public LastOrdersListViewModel(Link link, IMapper mapper, ILogger logger)
     {
-        Logger = logger;
-        _link = link;
         _mapper = mapper;
+        Logger = logger;
 
         this.Trace("init orders");
         Items = new ObservableCollection<Order>();
@@ -54,38 +49,48 @@ public partial class OpenOrdersListViewModel : ViewModelBase, ISingleton, ILogSu
                 SetItem(e.Item);
                 break;
             case ChangeEventType.Delete:
-                DeleteItem(e.Item);
+                SetItem(e.Item);
                 break;
         }
     }
 
     private void InitItems(IReadOnlyCollection<OrderModel> models)
     {
-        Items.Clear();
-        var items = models
-            .Where(x => x.Status is not (OrderStatus.Filled or OrderStatus.Expired or OrderStatus.Canceled))
-            .Select(_mapper.Map<Order>)
-            .ToList();
-        items.Sort(_comparison);
-        Items.AddRange(items);
+        foreach (var model in models)
+        {
+            var item = Items.FirstOrDefault(x => x.Id == model.Id);
+
+            if (item is null)
+            {
+                Items.Add(_mapper.Map<Order>(model));
+            }
+            else
+            {
+                item.Status = model.Status;
+                item.ExecutedQty = model.ExecutedQty;
+                item.ExecutedPrice = model.ExecutedPrice;
+                item.UpdatedAt = model.UpdatedAt;
+                item.UpdatedAtString = Instant.FromUnixTimeMilliseconds(model.UpdatedAt).LocalDateTime();
+            }
+        }
+
+        Items.ForceSort(_comparison);
+
+        while (Items.Count > MaxOrders)
+            Items.Remove(Items[^1]);
     }
 
     private void SetItem(OrderModel model)
     {
         var item = Items.FirstOrDefault(x => x.Id == model.Id);
 
-        if (model.Status is OrderStatus.Filled or OrderStatus.Expired or OrderStatus.Canceled)
-        {
-            if (item is not null)
-                Items.Remove(item);
-
-            return;
-        }
-
         if (item is null)
         {
             Items.Add(_mapper.Map<Order>(model));
             Items.ForceSort(_comparison);
+
+            while (Items.Count > MaxOrders)
+                Items.Remove(Items[^1]);
         }
         else
         {
@@ -95,38 +100,5 @@ public partial class OpenOrdersListViewModel : ViewModelBase, ISingleton, ILogSu
             item.UpdatedAt = model.UpdatedAt;
             item.UpdatedAtString = Instant.FromUnixTimeMilliseconds(model.UpdatedAt).LocalDateTime();
         }
-    }
-
-    private void DeleteItem(OrderModel model)
-    {
-        var item = Items.FirstOrDefault(x => x.Id == model.Id);
-        if (item is not null)
-            Items.Remove(item);
-    }
-
-    [RelayCommand]
-    private async Task CancelOrder(Order? x)
-    {
-        if (x is null)
-            return;
-
-        var model = new OrderModel(
-            x.Id,
-            x.ClientOrderId,
-            x.Symbol,
-            x.Side,
-            x.Type,
-            x.TotalQty,
-            x.Price,
-            x.LevelPrice,
-            x.ReduceOnly,
-            x.CreatedAt,
-            x.Status,
-            x.ExecutedQty,
-            x.ExecutedPrice,
-            x.UpdatedAt
-        );
-
-        await _link.UserConnector.CancelOrder(model);
     }
 }

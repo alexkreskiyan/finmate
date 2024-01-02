@@ -9,7 +9,7 @@
     <Border BorderBrush="Gray" BorderThickness="2">
         <DockPanel>
             <TextBlock DockPanel.Dock="Top" FontSize="16" FontWeight="Bold">Positions</TextBlock>
-            <DataGrid ItemsSource="{Binding Positions}"
+            <DataGrid ItemsSource="{Binding Items}"
                       IsReadOnly="True"
                       SelectedIndex="-1"
                       CanUserReorderColumns="False"

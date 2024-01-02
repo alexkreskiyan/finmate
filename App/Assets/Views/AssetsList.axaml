@@ -9,7 +9,7 @@
     <Border BorderBrush="Gray" BorderThickness="2">
         <DockPanel>
             <TextBlock DockPanel.Dock="Top" FontSize="16" FontWeight="Bold">Assets</TextBlock>
-            <DataGrid ItemsSource="{Binding Assets}"
+            <DataGrid ItemsSource="{Binding Items}"
                       IsReadOnly="True"
                       SelectedIndex="-1"
                       IsEnabled="False"

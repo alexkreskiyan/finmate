@@ -13,7 +13,8 @@ public sealed record Trade
     public string CommissionAsset { get; init; }
     public decimal CommissionAmount { get; init; }
     public bool Maker { get; init; }
-    public string Moment { get; init; }
+    public long Moment { get; init; }
+    public string MomentString { get; init; }
 
     public Trade(
         string id,
@@ -35,6 +36,7 @@ public sealed record Trade
         CommissionAsset = commissionAsset;
         CommissionAmount = commissionAmount;
         Maker = maker;
-        Moment = Instant.FromUnixTimeMilliseconds(moment).LocalTime();
+        Moment = moment;
+        MomentString = Instant.FromUnixTimeMilliseconds(moment).LocalTime();
     }
 }

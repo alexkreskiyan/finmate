@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Linq;
 using Annium.Collections.ObjectModel;
+using Annium.Core.Mapper;
 using Annium.Data.Tables;
 using Annium.Finance.Providers.Abstractions.Domain.Models;
 using Annium.Logging;
@@ -10,20 +12,24 @@ using App.Lib;
 using App.Main.Services;
 using App.Positions.Models;
 using Avalonia.ReactiveUI;
+using DynamicData;
 
 namespace App.Positions.ViewModels;
 
 public class PositionsListViewModel : ViewModelBase, ISingleton, ILogSubject
 {
     public ILogger Logger { get; }
-    public ObservableCollection<Position> Positions { get; }
+    public ObservableCollection<Position> Items { get; }
+    private readonly IMapper _mapper;
+    private readonly Comparison<Position> _comparison = (a, b) => string.CompareOrdinal(a.Symbol, b.Symbol);
 
-    public PositionsListViewModel(Link link, ILogger logger)
+    public PositionsListViewModel(Link link, IMapper mapper, ILogger logger)
     {
+        _mapper = mapper;
         Logger = logger;
 
         this.Trace("init positions");
-        Positions = new ObservableCollection<Position>();
+        Items = new ObservableCollection<Position>();
 
         this.Trace("observe positions");
         link.UserConnector.Positions.SubscribeOn(AvaloniaScheduler.Instance).Subscribe(HandlePosition);
@@ -36,45 +42,54 @@ public class PositionsListViewModel : ViewModelBase, ISingleton, ILogSubject
         switch (e.Type)
         {
             case ChangeEventType.Init:
-                Positions.Clear();
-                foreach (var x in e.Items)
-                    SetPosition(x);
+                InitItems(e.Items);
                 break;
             case ChangeEventType.Set:
-                SetPosition(e.Item);
+                SetItem(e.Item);
                 break;
             case ChangeEventType.Delete:
-                var item = e.Item;
-                var position = Positions.FirstOrDefault(
-                    x => x.Symbol == item.Symbol && x.Orientation == item.OrientationRange
-                );
-                if (position is not null)
-                    Positions.Remove(position);
+                DeleteItem(e.Item);
                 break;
         }
     }
 
-    private void SetPosition(PositionModel x)
+    private void InitItems(IReadOnlyCollection<PositionModel> models)
     {
-        var position = Positions.FirstOrDefault(p => p.Symbol == x.Symbol && p.Orientation == x.OrientationRange);
-        if (x.Amount == 0m)
+        Items.Clear();
+        var items = models.Where(x => x.Amount != 0).Select(_mapper.Map<Position>).ToList();
+        items.Sort(_comparison);
+        Items.AddRange(items);
+    }
+
+    private void SetItem(PositionModel model)
+    {
+        var item = Items.FirstOrDefault(x => x.Symbol == model.Symbol && x.Orientation == model.OrientationRange);
+
+        if (model.Amount == 0m)
         {
-            if (position is not null)
-                Positions.Remove(position);
+            if (item is not null)
+                Items.Remove(item);
 
             return;
         }
 
-        if (position is not null)
+        if (item is null)
         {
-            position.MarginType = x.MarginType;
-            position.Leverage = x.Leverage;
-            position.Amount = x.Amount;
+            Items.Add(_mapper.Map<Position>(model));
+            Items.ForceSort(_comparison);
         }
         else
         {
-            Positions.Add(new Position(x.Symbol, x.OrientationRange, x.MarginType, x.Leverage, x.Amount));
-            Positions.Sort((a, b) => string.CompareOrdinal(a.Symbol, b.Symbol));
+            item.MarginType = model.MarginType;
+            item.Leverage = model.Leverage;
+            item.Amount = model.Amount;
         }
+    }
+
+    private void DeleteItem(PositionModel model)
+    {
+        var item = Items.FirstOrDefault(x => x.Symbol == model.Symbol && x.Orientation == model.OrientationRange);
+        if (item is not null)
+            Items.Remove(item);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Linq;
 using Annium.Collections.ObjectModel;
+using Annium.Core.Mapper;
 using Annium.Finance.Providers.Abstractions.Domain.Models;
 using Annium.Logging;
 using App.Lib;
@@ -14,45 +15,36 @@ namespace App.Trades.ViewModels;
 
 public class TradesListViewModel : ViewModelBase, ISingleton, ILogSubject
 {
+    private readonly IMapper _mapper;
     public ILogger Logger { get; }
-    public ObservableCollection<Trade> Trades { get; }
+    public ObservableCollection<Trade> Items { get; }
+    private readonly Comparison<Trade> _comparison = (a, b) => a.Moment < b.Moment ? 1 : -1;
 
-    public TradesListViewModel(Link link, ILogger logger)
+    public TradesListViewModel(Link link, IMapper mapper, ILogger logger)
     {
         Logger = logger;
+        _mapper = mapper;
 
-        this.Trace("init positions");
-        Trades = new ObservableCollection<Trade>();
+        this.Trace("init trades");
+        Items = new ObservableCollection<Trade>();
 
-        this.Trace("observe positions");
+        this.Trace("observe trades");
         link.UserConnector.Trades.SubscribeOn(AvaloniaScheduler.Instance).Subscribe(HandleTrade);
 
         this.Trace("done");
     }
 
-    private void HandleTrade(TradeModel x)
+    private void HandleTrade(TradeModel model)
     {
-        var trade = Trades.FirstOrDefault(t => t.OrderId == x.OrderId && t.Id == x.Id);
+        var item = Items.FirstOrDefault(t => t.OrderId == model.OrderId && t.Id == model.Id);
 
-        if (trade is not null)
+        if (item is not null)
         {
-            this.Error("Trade {trade} already loaded", x);
+            this.Error("Trade {trade} already loaded", model);
             return;
         }
 
-        Trades.Add(
-            new Trade(
-                x.Id,
-                x.OrderId,
-                x.Symbol,
-                x.Price,
-                x.Qty,
-                x.CommissionAsset,
-                x.CommissionAmount,
-                x.Maker,
-                x.Moment
-            )
-        );
-        Trades.Sort((a, b) => -1 * string.CompareOrdinal(a.Moment, b.Moment));
+        Items.Add(_mapper.Map<Trade>(model));
+        Items.ForceSort(_comparison);
     }
 }

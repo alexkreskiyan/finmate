@@ -21,7 +21,7 @@
                 <positions:PositionsList Grid.Column="1"/>
             </Grid>
             <orders:OpenOrdersList Grid.Row="1"/>
-            <TextBlock Grid.Row="2">Last orders</TextBlock>
+            <orders:LastOrdersList Grid.Row="2"/>
             <trades:TradesList Grid.Row="3"/>
         </Grid>
         <Grid Grid.Column="1" RowDefinitions="10*, 30*, 30*, 30*" ColumnDefinitions="*">
