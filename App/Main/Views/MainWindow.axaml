@@ -14,19 +14,17 @@
         x:Class="App.Main.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Title="App">
-    <Grid RowDefinitions="*" ColumnDefinitions="28*, 55*, 17*">
-        <Grid Grid.Column="0" RowDefinitions="30*, 70*" ColumnDefinitions="*">
-            <Grid Grid.Column="0" RowDefinitions="*" ColumnDefinitions="40*, 60*">
+    <Grid RowDefinitions="*" ColumnDefinitions="75*, 25*">
+        <Grid Grid.Column="0" RowDefinitions="20*, 20*, 30*, 30*" ColumnDefinitions="*">
+            <Grid Grid.Row="0" RowDefinitions="*" ColumnDefinitions="40*, 60*">
                 <assets:AssetsList Grid.Column="0"/>
                 <positions:PositionsList Grid.Column="1"/>
             </Grid>
-            <trades:TradesList Grid.Row="1"/>
+            <orders:OpenOrdersList Grid.Row="1"/>
+            <TextBlock Grid.Row="2">Last orders</TextBlock>
+            <trades:TradesList Grid.Row="3"/>
         </Grid>
-        <Grid Grid.Column="1" RowDefinitions="30*, 70*" ColumnDefinitions="*">
-            <orders:OpenOrdersList Grid.Row="0"/>
-            <TextBlock Grid.Row="1">Last orders</TextBlock>
-        </Grid>
-        <Grid Grid.Column="2" RowDefinitions="10*, 30*, 30*, 30*" ColumnDefinitions="*">
+        <Grid Grid.Column="1" RowDefinitions="10*, 30*, 30*, 30*" ColumnDefinitions="*">
             <connection:ConnectionState Grid.Row="0"/>
             <TextBlock Grid.Row="1">Order buttons</TextBlock>
             <instruments:InstrumentsList Grid.Row="2"/>

@@ -22,12 +22,12 @@
                       BorderThickness="1"
                       BorderBrush="Gray">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Moment" Binding="{Binding Moment}" Width="1*" FontSize="8" />
-                    <DataGridTextColumn Header="Open" Binding="{Binding Open}" Width="1*" FontSize="8" />
-                    <DataGridTextColumn Header="High" Binding="{Binding High}" Width="1*" FontSize="8" />
-                    <DataGridTextColumn Header="Low" Binding="{Binding Low}" Width="1*" FontSize="8" />
-                    <DataGridTextColumn Header="Close" Binding="{Binding Close}" Width="1*" FontSize="8" />
-                    <DataGridTextColumn Header="Volume" Binding="{Binding Volume}" Width="1*" FontSize="8" />
+                    <DataGridTextColumn Header="Moment" Binding="{Binding Moment}" Width="1*" FontSize="11" />
+                    <DataGridTextColumn Header="Open" Binding="{Binding Open}" Width="1*" FontSize="11" />
+                    <DataGridTextColumn Header="High" Binding="{Binding High}" Width="1*" FontSize="11" />
+                    <DataGridTextColumn Header="Low" Binding="{Binding Low}" Width="1*" FontSize="11" />
+                    <DataGridTextColumn Header="Close" Binding="{Binding Close}" Width="1*" FontSize="11" />
+                    <DataGridTextColumn Header="Volume" Binding="{Binding Volume}" Width="1*" FontSize="11" />
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>

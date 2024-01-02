@@ -22,11 +22,11 @@
                       BorderThickness="1"
                       BorderBrush="Gray">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}" Width="2*" FontSize="8" />
-                    <DataGridTextColumn Header="Range" Binding="{Binding Orientation}" Width="2*" FontSize="8" />
-                    <DataGridTextColumn Header="Margin" Binding="{Binding MarginType}" Width="2*" FontSize="8" />
-                    <DataGridTextColumn Header="Leverage" Binding="{Binding Leverage}" Width="2*" FontSize="8" />
-                    <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" Width="3*" FontSize="8" />
+                    <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}" Width="2*" FontSize="11" />
+                    <DataGridTextColumn Header="Range" Binding="{Binding Orientation}" Width="2*" FontSize="11" />
+                    <DataGridTextColumn Header="Margin" Binding="{Binding MarginType}" Width="2*" FontSize="11" />
+                    <DataGridTextColumn Header="Leverage" Binding="{Binding Leverage}" Width="2*" FontSize="11" />
+                    <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" Width="3*" FontSize="11" />
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>

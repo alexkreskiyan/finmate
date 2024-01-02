@@ -24,20 +24,20 @@
                 BorderThickness="1"
                 BorderBrush="Gray">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="3*" FontSize="8" />
-                    <DataGridTextColumn Header="Cid" Binding="{Binding ClientOrderId}" Width="3*" FontSize="8" />
-                    <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}" Width="3*" FontSize="8" />
-                    <DataGridTextColumn Header="Side" Binding="{Binding Side}" Width="3*" FontSize="8" />
-                    <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="3*" FontSize="8" />
-                    <DataGridTextColumn Header="Qty" Binding="{Binding TotalQty}" Width="3*" FontSize="8" />
-                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="3*" FontSize="8" />
-                    <DataGridTextColumn Header="L-price" Binding="{Binding LevelPrice}" Width="3*" FontSize="8" />
-                    <DataGridTextColumn Header="Reduce" Binding="{Binding ReduceOnly}" Width="3*" FontSize="8" />
-                    <DataGridTextColumn Header="Created" Binding="{Binding CreatedAtString}" Width="4*" FontSize="8" />
-                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="3*" FontSize="8" />
-                    <DataGridTextColumn Header="Ex qty" Binding="{Binding ExecutedQty}" Width="3*" FontSize="8" />
-                    <DataGridTextColumn Header="Ex price" Binding="{Binding ExecutedPrice}" Width="3*" FontSize="8" />
-                    <DataGridTextColumn Header="Updated" Binding="{Binding UpdatedAtString}" Width="4*" FontSize="8" />
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="3*" FontSize="11" />
+                    <DataGridTextColumn Header="Cid" Binding="{Binding ClientOrderId}" Width="3*" FontSize="11" />
+                    <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}" Width="3*" FontSize="11" />
+                    <DataGridTextColumn Header="Side" Binding="{Binding Side}" Width="3*" FontSize="11" />
+                    <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="3*" FontSize="11" />
+                    <DataGridTextColumn Header="Qty" Binding="{Binding TotalQty}" Width="3*" FontSize="11" />
+                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="3*" FontSize="11" />
+                    <DataGridTextColumn Header="L-price" Binding="{Binding LevelPrice}" Width="3*" FontSize="11" />
+                    <DataGridTextColumn Header="Reduce" Binding="{Binding ReduceOnly}" Width="3*" FontSize="11" />
+                    <DataGridTextColumn Header="Created" Binding="{Binding CreatedAtString}" Width="4*" FontSize="11" />
+                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="3*" FontSize="11" />
+                    <DataGridTextColumn Header="Ex qty" Binding="{Binding ExecutedQty}" Width="3*" FontSize="11" />
+                    <DataGridTextColumn Header="Ex price" Binding="{Binding ExecutedPrice}" Width="3*" FontSize="11" />
+                    <DataGridTextColumn Header="Updated" Binding="{Binding UpdatedAtString}" Width="4*" FontSize="11" />
                     <DataGridTemplateColumn Width="*" Header="Actions">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
