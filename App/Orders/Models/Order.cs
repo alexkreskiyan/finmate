@@ -16,7 +16,8 @@ public sealed record Order : ReactiveRecord
     public decimal Price { get; init; }
     public decimal LevelPrice { get; init; }
     public bool ReduceOnly { get; init; }
-    public string CreatedAt { get; init; }
+    public long CreatedAt { get; init; }
+    public string CreatedAtString { get; init; }
     public OrderStatus Status
     {
         get => _status;
@@ -32,16 +33,22 @@ public sealed record Order : ReactiveRecord
         get => _executedPrice;
         set => this.RaiseAndSetIfChanged(ref _executedPrice, value);
     }
-    public string UpdatedAt
+    public long UpdatedAt
     {
         get => _updatedAt;
         set => this.RaiseAndSetIfChanged(ref _updatedAt, value);
+    }
+    public string UpdatedAtString
+    {
+        get => _updatedAtString;
+        set => this.RaiseAndSetIfChanged(ref _updatedAtString, value);
     }
 
     private OrderStatus _status;
     private decimal _executedQty;
     private decimal _executedPrice;
-    private string _updatedAt;
+    private long _updatedAt;
+    private string _updatedAtString;
 
     public Order(
         string id,
@@ -69,10 +76,12 @@ public sealed record Order : ReactiveRecord
         Price = price;
         LevelPrice = levelPrice;
         ReduceOnly = reduceOnly;
-        CreatedAt = Instant.FromUnixTimeMilliseconds(createdAt).LocalDateTime();
+        CreatedAt = createdAt;
+        CreatedAtString = Instant.FromUnixTimeMilliseconds(createdAt).LocalDateTime();
         _status = status;
         _executedQty = executedQty;
         _executedPrice = executedPrice;
-        _updatedAt = Instant.FromUnixTimeMilliseconds(updatedAt).LocalDateTime();
+        _updatedAt = updatedAt;
+        _updatedAtString = Instant.FromUnixTimeMilliseconds(updatedAt).LocalDateTime();
     }
 }

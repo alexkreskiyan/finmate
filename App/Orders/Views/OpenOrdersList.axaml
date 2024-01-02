@@ -9,33 +9,49 @@
     <Border BorderBrush="Gray" BorderThickness="2">
         <DockPanel>
             <TextBlock DockPanel.Dock="Top" FontSize="16" FontWeight="Bold">Orders</TextBlock>
-            <DataGrid ItemsSource="{Binding Orders}"
-                      IsReadOnly="True"
-                      SelectedIndex="-1"
-                      CanUserReorderColumns="False"
-                      CanUserResizeColumns="False"
-                      CanUserSortColumns="False"
-                      GridLinesVisibility="All"
-                      HorizontalAlignment="Stretch"
-                      VerticalAlignment="Stretch"
-                      RowBackground="#1000"
-                      BorderThickness="1"
-                      BorderBrush="Gray">
+            <DataGrid
+                Name="Orders"
+                ItemsSource="{Binding Orders}"
+                IsReadOnly="True"
+                SelectedIndex="-1"
+                CanUserReorderColumns="False"
+                CanUserResizeColumns="False"
+                CanUserSortColumns="False"
+                GridLinesVisibility="All"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                RowBackground="#1000"
+                BorderThickness="1"
+                BorderBrush="Gray">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="1*" FontSize="9" />
-                    <DataGridTextColumn Header="Cid" Binding="{Binding ClientOrderId}" Width="1*" FontSize="9" />
-                    <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}" Width="1*" FontSize="9" />
-                    <DataGridTextColumn Header="Side" Binding="{Binding Side}" Width="1*" FontSize="9" />
-                    <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="1*" FontSize="9" />
-                    <DataGridTextColumn Header="Qty" Binding="{Binding TotalQty}" Width="1*" FontSize="9" />
-                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="1*" FontSize="9" />
-                    <DataGridTextColumn Header="L-price" Binding="{Binding LevelPrice}" Width="1*" FontSize="9" />
-                    <DataGridTextColumn Header="Reduce" Binding="{Binding ReduceOnly}" Width="1*" FontSize="9" />
-                    <DataGridTextColumn Header="Created" Binding="{Binding CreatedAt}" Width="1*" FontSize="9" />
-                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="1*" FontSize="9" />
-                    <DataGridTextColumn Header="Ex qty" Binding="{Binding ExecutedQty}" Width="1*" FontSize="9" />
-                    <DataGridTextColumn Header="Ex price" Binding="{Binding ExecutedPrice}" Width="1*" FontSize="9" />
-                    <DataGridTextColumn Header="Updated" Binding="{Binding UpdatedAt}" Width="1*" FontSize="9" />
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="3*" FontSize="9" />
+                    <DataGridTextColumn Header="Cid" Binding="{Binding ClientOrderId}" Width="3*" FontSize="9" />
+                    <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}" Width="3*" FontSize="9" />
+                    <DataGridTextColumn Header="Side" Binding="{Binding Side}" Width="3*" FontSize="9" />
+                    <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="3*" FontSize="9" />
+                    <DataGridTextColumn Header="Qty" Binding="{Binding TotalQty}" Width="3*" FontSize="9" />
+                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="3*" FontSize="9" />
+                    <DataGridTextColumn Header="L-price" Binding="{Binding LevelPrice}" Width="3*" FontSize="9" />
+                    <DataGridTextColumn Header="Reduce" Binding="{Binding ReduceOnly}" Width="3*" FontSize="9" />
+                    <DataGridTextColumn Header="Created" Binding="{Binding CreatedAtString}" Width="4*" FontSize="9" />
+                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="3*" FontSize="9" />
+                    <DataGridTextColumn Header="Ex qty" Binding="{Binding ExecutedQty}" Width="3*" FontSize="9" />
+                    <DataGridTextColumn Header="Ex price" Binding="{Binding ExecutedPrice}" Width="3*" FontSize="9" />
+                    <DataGridTextColumn Header="Updated" Binding="{Binding UpdatedAtString}" Width="4*" FontSize="9" />
+                    <DataGridTemplateColumn Width="*" Header="Actions">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button
+                                    HorizontalAlignment="Center"
+                                    HorizontalContentAlignment="Center"
+                                    Background="#232323"
+                                    Command="{Binding #Orders.((viewModels:OpenOrdersListViewModel)DataContext).CancelOrderCommand}"
+                                    CommandParameter="{Binding .}"
+                                    Content="X"
+                                    Foreground="White" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>

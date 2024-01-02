@@ -2,6 +2,8 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using Annium.Collections.ObjectModel;
 using Annium.Data.Tables;
 using Annium.Finance.Providers.Abstractions.Domain.Enums;
@@ -11,24 +13,30 @@ using App.Lib;
 using App.Main.Services;
 using App.Orders.Models;
 using Avalonia.ReactiveUI;
+using CommunityToolkit.Mvvm.Input;
 using NodaTime;
 
 namespace App.Orders.ViewModels;
 
 public class OpenOrdersListViewModel : ViewModelBase, ISingleton, ILogSubject
 {
+    private readonly Link _link;
     public ILogger Logger { get; }
     public ObservableCollection<Order> Orders { get; }
+    public ICommand CancelOrderCommand { get; }
 
     public OpenOrdersListViewModel(Link link, ILogger logger)
     {
         Logger = logger;
+        _link = link;
 
         this.Trace("init orders");
         Orders = new ObservableCollection<Order>();
 
         this.Trace("observe orders");
         link.UserConnector.Orders.SubscribeOn(AvaloniaScheduler.Instance).Subscribe(HandleOrder);
+
+        CancelOrderCommand = new AsyncRelayCommand<Order>(CancelOrder);
 
         this.Trace("done");
     }
@@ -72,7 +80,8 @@ public class OpenOrdersListViewModel : ViewModelBase, ISingleton, ILogSubject
             order.Status = x.Status;
             order.ExecutedQty = x.ExecutedQty;
             order.ExecutedPrice = x.ExecutedPrice;
-            order.UpdatedAt = Instant.FromUnixTimeMilliseconds(x.UpdatedAt).LocalDateTime();
+            order.UpdatedAt = x.UpdatedAt;
+            order.UpdatedAtString = Instant.FromUnixTimeMilliseconds(x.UpdatedAt).LocalDateTime();
         }
         else
         {
@@ -94,7 +103,32 @@ public class OpenOrdersListViewModel : ViewModelBase, ISingleton, ILogSubject
                     x.UpdatedAt
                 )
             );
-            Orders.Sort((a, b) => -1 * string.CompareOrdinal(a.UpdatedAt, b.UpdatedAt));
+            Orders.Sort((a, b) => a.CreatedAt < b.CreatedAt ? 1 : -1);
         }
+    }
+
+    private async Task CancelOrder(Order? x)
+    {
+        if (x is null)
+            return;
+
+        var model = new OrderModel(
+            x.Id,
+            x.ClientOrderId,
+            x.Symbol,
+            x.Side,
+            x.Type,
+            x.TotalQty,
+            x.Price,
+            x.LevelPrice,
+            x.ReduceOnly,
+            x.CreatedAt,
+            x.Status,
+            x.ExecutedQty,
+            x.ExecutedPrice,
+            x.UpdatedAt
+        );
+
+        await _link.UserConnector.CancelOrder(model);
     }
 }
