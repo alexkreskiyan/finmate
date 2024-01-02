@@ -1,0 +1,43 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:App.Orders.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="500"
+             x:Class="App.Orders.Views.OpenOrdersList"
+             x:DataType="viewModels:OpenOrdersListViewModel">
+    <Border BorderBrush="Gray" BorderThickness="2">
+        <DockPanel>
+            <TextBlock DockPanel.Dock="Top" FontSize="16" FontWeight="Bold">Orders</TextBlock>
+            <DataGrid ItemsSource="{Binding Orders}"
+                      IsReadOnly="True"
+                      SelectedIndex="-1"
+                      CanUserReorderColumns="False"
+                      CanUserResizeColumns="False"
+                      CanUserSortColumns="False"
+                      GridLinesVisibility="All"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      RowBackground="#1000"
+                      BorderThickness="1"
+                      BorderBrush="Gray">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="1*" FontSize="9" />
+                    <DataGridTextColumn Header="Cid" Binding="{Binding ClientOrderId}" Width="1*" FontSize="9" />
+                    <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}" Width="1*" FontSize="9" />
+                    <DataGridTextColumn Header="Side" Binding="{Binding Side}" Width="1*" FontSize="9" />
+                    <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="1*" FontSize="9" />
+                    <DataGridTextColumn Header="Qty" Binding="{Binding TotalQty}" Width="1*" FontSize="9" />
+                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="1*" FontSize="9" />
+                    <DataGridTextColumn Header="L-price" Binding="{Binding LevelPrice}" Width="1*" FontSize="9" />
+                    <DataGridTextColumn Header="Reduce" Binding="{Binding ReduceOnly}" Width="1*" FontSize="9" />
+                    <DataGridTextColumn Header="Created" Binding="{Binding CreatedAt}" Width="1*" FontSize="9" />
+                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="1*" FontSize="9" />
+                    <DataGridTextColumn Header="Ex qty" Binding="{Binding ExecutedQty}" Width="1*" FontSize="9" />
+                    <DataGridTextColumn Header="Ex price" Binding="{Binding ExecutedPrice}" Width="1*" FontSize="9" />
+                    <DataGridTextColumn Header="Updated" Binding="{Binding UpdatedAt}" Width="1*" FontSize="9" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+    </Border>
+</UserControl>
