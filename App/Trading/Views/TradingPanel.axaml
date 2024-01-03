@@ -5,7 +5,7 @@
              xmlns:views="clr-namespace:App.Trading.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="App.Trading.Views.TradingPanel">
-    <TabControl>
+    <TabControl BorderBrush="Gray" BorderThickness="2">
         <TabItem Header="Limit">
             <views:LimitOrderPanel />
         </TabItem>
