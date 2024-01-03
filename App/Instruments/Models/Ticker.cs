@@ -5,11 +5,13 @@ namespace App.Instruments.Models;
 public sealed record Ticker : ReactiveRecord
 {
     public string Symbol { get; }
+
     public decimal BidPrice
     {
         get => _bidPrice;
         set => this.RaiseAndSetIfChanged(ref _bidPrice, value);
     }
+
     public decimal AskPrice
     {
         get => _askPrice;

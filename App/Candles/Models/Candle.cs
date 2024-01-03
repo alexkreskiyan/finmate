@@ -7,26 +7,31 @@ namespace App.Candles.Models;
 public sealed record Candle : ReactiveRecord
 {
     public string Moment { get; }
+
     public decimal Open
     {
         get => _open;
         set => this.RaiseAndSetIfChanged(ref _open, value);
     }
+
     public decimal High
     {
         get => _high;
         set => this.RaiseAndSetIfChanged(ref _high, value);
     }
+
     public decimal Low
     {
         get => _low;
         set => this.RaiseAndSetIfChanged(ref _low, value);
     }
+
     public decimal Close
     {
         get => _close;
         set => this.RaiseAndSetIfChanged(ref _close, value);
     }
+
     public decimal Volume
     {
         get => _volume;

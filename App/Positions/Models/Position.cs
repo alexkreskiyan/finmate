@@ -7,16 +7,19 @@ public sealed record Position : ReactiveRecord
 {
     public string Symbol { get; }
     public OrientationRange Orientation { get; }
+
     public MarginType MarginType
     {
         get => _marginType;
         set => this.RaiseAndSetIfChanged(ref _marginType, value);
     }
+
     public decimal Leverage
     {
         get => _leverage;
         set => this.RaiseAndSetIfChanged(ref _leverage, value);
     }
+
     public decimal Amount
     {
         get => _amount;

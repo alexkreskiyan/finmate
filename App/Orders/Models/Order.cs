@@ -18,26 +18,31 @@ public sealed record Order : ReactiveRecord
     public bool ReduceOnly { get; init; }
     public long CreatedAt { get; init; }
     public string CreatedAtString { get; init; }
+
     public OrderStatus Status
     {
         get => _status;
         set => this.RaiseAndSetIfChanged(ref _status, value);
     }
+
     public decimal ExecutedQty
     {
         get => _executedQty;
         set => this.RaiseAndSetIfChanged(ref _executedQty, value);
     }
+
     public decimal ExecutedPrice
     {
         get => _executedPrice;
         set => this.RaiseAndSetIfChanged(ref _executedPrice, value);
     }
+
     public long UpdatedAt
     {
         get => _updatedAt;
         set => this.RaiseAndSetIfChanged(ref _updatedAt, value);
     }
+
     public string UpdatedAtString
     {
         get => _updatedAtString;

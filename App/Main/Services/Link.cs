@@ -20,11 +20,13 @@ public class Link : ReactiveObject, ISingleton, ILogSubject
     public IMarketConnector MarketConnector => _marketConnector.Value;
     public IUserProvider UserProvider { get; }
     public IUserConnector UserConnector => _userConnector.Value;
+
     public string Symbol
     {
         get => _symbol;
         set => this.RaiseAndSetIfChanged(ref _symbol, value);
     }
+
     private readonly Lazy<IMarketConnector> _marketConnector;
     private readonly Lazy<IUserConnector> _userConnector;
     private readonly Configuration _config;

@@ -17,18 +17,18 @@
     <Grid RowDefinitions="*" ColumnDefinitions="75*, 25*">
         <Grid Grid.Column="0" RowDefinitions="20*, 20*, 30*, 30*" ColumnDefinitions="*">
             <Grid Grid.Row="0" RowDefinitions="*" ColumnDefinitions="40*, 60*">
-                <assets:AssetsList Grid.Column="0"/>
-                <positions:PositionsList Grid.Column="1"/>
+                <assets:AssetsList Grid.Column="0" />
+                <positions:PositionsList Grid.Column="1" />
             </Grid>
-            <orders:OpenOrdersList Grid.Row="1"/>
-            <orders:LastOrdersList Grid.Row="2"/>
-            <trades:TradesList Grid.Row="3"/>
+            <orders:OpenOrdersList Grid.Row="1" />
+            <orders:LastOrdersList Grid.Row="2" />
+            <trades:TradesList Grid.Row="3" />
         </Grid>
         <Grid Grid.Column="1" RowDefinitions="10*, 30*, 30*, 30*" ColumnDefinitions="*">
-            <connection:ConnectionState Grid.Row="0"/>
+            <connection:ConnectionState Grid.Row="0" />
             <TextBlock Grid.Row="1">Order buttons</TextBlock>
-            <instruments:InstrumentsList Grid.Row="2"/>
-            <candles:CandlesList Grid.Row="3"/>
+            <instruments:InstrumentsList Grid.Row="2" />
+            <candles:CandlesList Grid.Row="3" />
         </Grid>
     </Grid>
 </Window>
