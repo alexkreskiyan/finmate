@@ -19,7 +19,8 @@
             ShowButtonSpinner="False"
             Value="{Binding Price}" />
         <CheckBox
-            Content="Reduce Only" IsChecked="{Binding ReduceOnly}" />
+            Content="Reduce Only" 
+            IsChecked="{Binding ReduceOnly}" />
         <Grid ColumnDefinitions="50*, 50*">
             <Button
                 Grid.Column="0"

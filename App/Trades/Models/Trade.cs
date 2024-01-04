@@ -37,6 +37,6 @@ public sealed record Trade
         CommissionAmount = commissionAmount;
         Maker = maker;
         Moment = moment;
-        MomentString = Instant.FromUnixTimeMilliseconds(moment).LocalTime();
+        MomentString = Instant.FromUnixTimeMilliseconds(moment).LocalDateTime();
     }
 }
