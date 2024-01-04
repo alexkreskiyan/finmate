@@ -12,5 +12,8 @@
         <TabItem Header="Market">
             <views:MarketOrderPanel />
         </TabItem>
+        <TabItem Header="Level Limit">
+            <views:LevelLimitOrderPanel />
+        </TabItem>
     </TabControl>
 </UserControl>
