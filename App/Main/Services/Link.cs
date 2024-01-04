@@ -27,6 +27,12 @@ public class Link : ReactiveObject, ISingleton, ILogSubject
         set => this.RaiseAndSetIfChanged(ref _symbol, value);
     }
 
+    public decimal Price
+    {
+        get => _price;
+        set => this.RaiseAndSetIfChanged(ref _price, value);
+    }
+
     private readonly Lazy<IMarketConnector> _marketConnector;
     private readonly Lazy<IUserConnector> _userConnector;
     private readonly Configuration _config;
@@ -34,6 +40,7 @@ public class Link : ReactiveObject, ISingleton, ILogSubject
     private readonly IObjectCache<UserSettings, IUserConnector> _userCache;
     private readonly IMapper _mapper;
     private string _symbol;
+    private decimal _price;
 
     public Link(
         Configuration config,

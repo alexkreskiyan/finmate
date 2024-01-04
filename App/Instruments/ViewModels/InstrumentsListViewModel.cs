@@ -42,6 +42,7 @@ public class InstrumentsListViewModel : ViewModelBase, ISingleton, ILogSubject
 
         var ticker = e.AddedItems[0].NotNull().CastTo<Ticker>();
         _link.Symbol = ticker.Symbol;
+        _link.Price = (ticker.BidPrice + ticker.AskPrice) / 2;
     }
 
     private void HandleTicker(InstrumentTicker update)
@@ -49,5 +50,8 @@ public class InstrumentsListViewModel : ViewModelBase, ISingleton, ILogSubject
         var ticker = Tickers.FirstOrDefault(x => x.Symbol == update.Symbol).NotNull();
         ticker.BidPrice = update.BidPrice;
         ticker.AskPrice = update.AskPrice;
+
+        if (ticker.Symbol == _link.Symbol)
+            _link.Price = (ticker.BidPrice + ticker.AskPrice) / 2;
     }
 }
