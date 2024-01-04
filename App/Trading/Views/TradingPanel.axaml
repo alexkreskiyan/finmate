@@ -9,5 +9,8 @@
         <TabItem Header="Limit">
             <views:LimitOrderPanel />
         </TabItem>
+        <TabItem Header="Market">
+            <views:MarketOrderPanel />
+        </TabItem>
     </TabControl>
 </UserControl>
