@@ -34,7 +34,7 @@ public class CandlesListViewModel : ViewModelBase, ISingleton, ILogSubject
         Candles = new ObservableCollection<Candle>();
 
         this.Trace("init timer");
-        var timer = Timers.Async(LoadCandles, 0, 2000);
+        var timer = Timers.Async(LoadCandles, 0, 2000, logger);
 
         this.Trace("handle symbol change");
         link.WhenPropertyChanged(x => x.Symbol).Subscribe(_ => timer.Change(0, 2000));
