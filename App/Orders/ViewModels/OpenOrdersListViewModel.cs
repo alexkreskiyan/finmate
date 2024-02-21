@@ -9,6 +9,7 @@ using Annium.Core.Mapper;
 using Annium.Data.Tables;
 using Annium.Finance.Providers.Abstractions.Domain.Enums;
 using Annium.Finance.Providers.Abstractions.Domain.Models;
+using Annium.Finance.Providers.Abstractions.Domain.Tools;
 using Annium.Logging;
 using App.Lib;
 using App.Main.Services;
@@ -110,23 +111,8 @@ public partial class OpenOrdersListViewModel : ViewModelBase, ISingleton, ILogSu
         if (x is null)
             return;
 
-        var model = new OrderModel(
-            x.Id,
-            x.ClientOrderId,
-            x.Symbol,
-            x.Side,
-            x.Type,
-            x.TotalQty,
-            x.Price,
-            x.LevelPrice,
-            x.ReduceOnly,
-            x.CreatedAt,
-            x.Status,
-            x.ExecutedQty,
-            x.ExecutedPrice,
-            x.UpdatedAt
-        );
+        var request = RequestBuilder.CancelOrder(x.Id, x.ClientOrderId, x.Symbol);
 
-        await _link.UserConnector.CancelOrder(model);
+        await _link.UserConnector.CancelOrder(request);
     }
 }
