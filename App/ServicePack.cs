@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Immutable;
+using System.Linq;
 using Annium.Configuration.Abstractions;
 using Annium.Core.DependencyInjection;
 using Annium.Finance.Providers.Crypto.Binance.UsdFutures;
@@ -7,6 +9,7 @@ using App.Main.Models;
 using ReactiveUI;
 using Splat;
 using Splat.Microsoft.Extensions.DependencyInjection;
+using LogLevel = Annium.Logging.LogLevel;
 
 namespace App;
 
@@ -42,6 +45,37 @@ internal class ServicePack : ServicePackBase
 
     public override void Setup(IServiceProvider provider)
     {
-        provider.UseLogging(route => route.UseConsole());
+        var excludedSubjects = ImmutableArray.Create(
+            "DataConnection",
+            "ClientWebSocket",
+            "ServerWebSocket",
+            "ManagedWebSocket",
+            "StatusMonitor",
+            "StatusReporter",
+            "ConnectionMonitor",
+            "ParallelExecutor",
+            "ConcurrentExecutor",
+            "SequentialExecutor",
+            "DisposableBox",
+            "HttpRequest",
+            "ObjectCache",
+            "ServerTimeProvider",
+            "MarketProvider",
+            "UserProvider",
+            "CompositeLoader",
+            "SnapshotLoader",
+            "KeyedLoader",
+            "ListenKeyResolver"
+        );
+        provider.UseLogging(
+            route =>
+                route
+                    .For(
+                        x =>
+                            x.Level >= LogLevel.Warn
+                            || x.Level >= LogLevel.Trace && !excludedSubjects.Any(s => x.SubjectType.Contains(s))
+                    )
+                    .UseConsole()
+        );
     }
 }
