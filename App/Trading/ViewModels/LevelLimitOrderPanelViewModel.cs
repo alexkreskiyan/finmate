@@ -64,6 +64,7 @@ public partial class LevelLimitOrderPanelViewModel : ViewModelBase, ISingleton, 
             LevelPrice > _link.Price
                 ? RequestBuilder.InitTakeProfitLimitOrder(
                     Guid.NewGuid().ToString(),
+                    OrientationRange.Both,
                     _link.Symbol,
                     side,
                     Qty.Value,
@@ -73,6 +74,7 @@ public partial class LevelLimitOrderPanelViewModel : ViewModelBase, ISingleton, 
                 )
                 : RequestBuilder.InitStopLossLimitOrder(
                     Guid.NewGuid().ToString(),
+                    OrientationRange.Both,
                     _link.Symbol,
                     side,
                     Qty.Value,

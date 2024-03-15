@@ -56,6 +56,7 @@ public partial class LimitOrderPanelViewModel : ViewModelBase, ISingleton, ILogS
 
         var request = RequestBuilder.InitLimitOrder(
             Guid.NewGuid().ToString(),
+            OrientationRange.Both,
             _link.Symbol,
             side,
             Qty.Value,

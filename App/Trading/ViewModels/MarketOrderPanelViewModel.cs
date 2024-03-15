@@ -50,6 +50,7 @@ public partial class MarketOrderPanelViewModel : ViewModelBase, ISingleton, ILog
 
         var request = RequestBuilder.InitMarketOrder(
             Guid.NewGuid().ToString(),
+            OrientationRange.Both,
             _link.Symbol,
             side,
             Qty.Value,

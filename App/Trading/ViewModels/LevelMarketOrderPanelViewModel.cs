@@ -58,6 +58,7 @@ public partial class LevelMarketOrderPanelViewModel : ViewModelBase, ISingleton,
             LevelPrice > _link.Price
                 ? RequestBuilder.InitTakeProfitMarketOrder(
                     Guid.NewGuid().ToString(),
+                    OrientationRange.Both,
                     _link.Symbol,
                     side,
                     Qty.Value,
@@ -66,6 +67,7 @@ public partial class LevelMarketOrderPanelViewModel : ViewModelBase, ISingleton,
                 )
                 : RequestBuilder.InitStopLossMarketOrder(
                     Guid.NewGuid().ToString(),
+                    OrientationRange.Both,
                     _link.Symbol,
                     side,
                     Qty.Value,
