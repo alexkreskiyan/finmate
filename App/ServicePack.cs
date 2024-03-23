@@ -67,15 +67,13 @@ internal class ServicePack : ServicePackBase
             "KeyedLoader",
             "ListenKeyResolver"
         );
-        provider.UseLogging(
-            route =>
-                route
-                    .For(
-                        x =>
-                            x.Level >= LogLevel.Warn
-                            || x.Level >= LogLevel.Trace && !excludedSubjects.Any(s => x.SubjectType.Contains(s))
-                    )
-                    .UseConsole()
+        provider.UseLogging(route =>
+            route
+                .For(x =>
+                    x.Level >= LogLevel.Warn
+                    || x.Level >= LogLevel.Trace && !excludedSubjects.Any(s => x.SubjectType.Contains(s))
+                )
+                .UseConsole()
         );
     }
 }

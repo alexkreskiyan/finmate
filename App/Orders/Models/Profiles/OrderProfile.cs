@@ -7,24 +7,21 @@ public class OrderProfile : Profile
 {
     public OrderProfile()
     {
-        Map<OrderModel, Order>(
-            x =>
-                new Order(
-                    x.Id,
-                    x.ClientOrderId,
-                    x.Symbol,
-                    x.Side,
-                    x.Type,
-                    x.TotalQty,
-                    x.Price,
-                    x.LevelPrice,
-                    x.ReduceOnly,
-                    x.CreatedAt,
-                    x.Status,
-                    x.ExecutedQty,
-                    x.ExecutedPrice,
-                    x.UpdatedAt
-                )
-        );
+        Map<OrderModel, Order>(x => new Order(
+            x.Id,
+            x.ClientOrderId,
+            x.Symbol,
+            x.Side,
+            x.Type,
+            x.TotalQty,
+            x.Price,
+            x.LevelPrice,
+            x.ReduceOnly,
+            x.CreatedAt,
+            x.Status,
+            x.ExecutedQty,
+            x.ExecutedPrice,
+            x.UpdatedAt
+        ));
     }
 }
